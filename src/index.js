@@ -31,7 +31,7 @@ export const onPreBuild = async function ({
   };
 
   try {
-    const token = jwt.sign(payload, authKey, { header });
+    const token = jwt.sign(payload, atob(authKey), { header });
     process.env[tokenEnvVariable] = token;
     status.show({ summary: `MapKit JS token generated for ${origin} with success. Access it using process.env.${tokenEnvVariable}.` });
   } catch (error) {
