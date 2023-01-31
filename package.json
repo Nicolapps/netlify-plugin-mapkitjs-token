@@ -1,6 +1,6 @@
 {
   "name": "netlify-plugin-mapkitjs-token",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Netlify Build plugin - Generates MapKit JS tokens for Netlify deployments",
   "type": "module",
   "exports": "./src/index.js",
