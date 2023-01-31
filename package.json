@@ -56,5 +56,8 @@
     "netlify-cli": "^9.16.2",
     "prettier": "^2.1.2",
     "release-it": "^15.0.0"
+  },
+  "dependencies": {
+    "jsonwebtoken": "^9.0.0"
   }
 }
