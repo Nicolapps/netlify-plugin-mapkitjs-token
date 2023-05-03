@@ -21,13 +21,13 @@ export const onPreBuild = async function ({
   const payload = {
     iat: Date.now() / 1000,
     iss: teamId,
+    origin,
   };
 
   const header = {
     typ: 'JWT',
     alg: 'ES256',
     kid: keyId,
-    origin,
   };
 
   try {
