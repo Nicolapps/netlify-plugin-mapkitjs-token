@@ -24,6 +24,7 @@ The following configuration parameters must be specified:
 | `MAPKIT_JS_KEY_ID`             | `keyId`            | The ID of the private key.                                                         |
 | `MAPKIT_JS_AUTH_KEY`           | `authKey`          | The [Base64-encoded](https://www.base64encode.org) contents of the `.p8` key file. |
 | `MAPKIT_JS_TOKEN_ENV_VARIABLE` | `tokenEnvVariable` | The name of the environment variable used to store the token.                      |
+| `MAPKIT_JS_TTL`                | `ttl`              | The number of seconds the token should be valid.                                   |
 
 The simplest way to define your parameters is to
 [set the environment variables](https://docs.netlify.com/environment-variables/get-started/#create-variables-with-the-netlify-ui-cli-or-api)

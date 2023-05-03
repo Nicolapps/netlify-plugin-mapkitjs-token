@@ -10,8 +10,9 @@ export const onPreBuild = async function ({
   const tokenEnvVariable = inputs.tokenEnvVariable
     || process.env.MAPKIT_JS_TOKEN_ENV_VARIABLE
     || 'MAPKIT_JS_TOKEN';
+  const ttl = inputs.ttl || process.env.MAPKIT_JS_TTL || 31_536_000; // 1 year
 
-  if (!teamId || !keyId || !authKey || !tokenEnvVariable) {
+  if (!teamId || !keyId || !authKey || !tokenEnvVariable || !ttl) {
     build.failBuild('Missing mandatory parameters');
     return;
   }
