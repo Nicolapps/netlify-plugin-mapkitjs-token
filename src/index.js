@@ -18,9 +18,11 @@ export const onPreBuild = async function ({
   }
 
   const origin = process.env.DEPLOY_PRIME_URL;
+  const iat = Date.now() / 1000;
 
   const payload = {
-    iat: Date.now() / 1000,
+    iat,
+    exp: iat + ttl,
     iss: teamId,
     origin,
   };
@@ -34,7 +36,7 @@ export const onPreBuild = async function ({
   try {
     const token = jwt.sign(payload, atob(authKey), { header });
     process.env[tokenEnvVariable] = token;
-    status.show({ summary: `MapKit JS token generated for ${origin} with success. Access it using process.env.${tokenEnvVariable}.` });
+    status.show({ summary: `MapKit JS token generated for ${origin} (${ttl} seconds) with success. Access it using process.env.${tokenEnvVariable}.` });
   } catch (error) {
     build.failBuild('Error', { error });
   }
