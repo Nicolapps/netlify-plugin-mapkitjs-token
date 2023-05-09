@@ -11,15 +11,14 @@ export const onPreBuild = async function ({
     || process.env.MAPKIT_JS_TOKEN_ENV_VARIABLE
     || 'MAPKIT_JS_TOKEN';
   const ttl = inputs.ttl || process.env.MAPKIT_JS_TTL || 31_536_000; // 1 year
+  const origin = inputs.origin || process.env.MAPKIT_JS_ORIGIN || process.env.DEPLOY_PRIME_URL;
 
   if (!teamId || !keyId || !authKey || !tokenEnvVariable || !ttl) {
     build.failBuild('Missing mandatory parameters');
     return;
   }
 
-  const origin = process.env.DEPLOY_PRIME_URL;
   const iat = Date.now() / 1000;
-
   const payload = {
     iat,
     exp: iat + ttl,
@@ -36,7 +35,11 @@ export const onPreBuild = async function ({
   try {
     const token = jwt.sign(payload, atob(authKey), { header });
     process.env[tokenEnvVariable] = token;
-    status.show({ summary: `MapKit JS token generated for ${origin} (${ttl} seconds) with success. Access it using process.env.${tokenEnvVariable}.` });
+    status.show({
+      title: 'MapKit JS token generated successfully',
+      summary: `Origin: ${origin}, expires in ${ttl} seconds.`,
+      text: `process.env.${tokenEnvVariable} = '${token}';`,
+    });
   } catch (error) {
     build.failBuild('Error', { error });
   }
